@@ -18,7 +18,7 @@ function BarcodeScanner() {
             width: 1280,  // Defina a largura desejada
             height: 720,  // Defina a altura desejada
             facingMode: 'environment', // 'user' para a câmera frontal, 'environment' para a traseira
-            zoom: 2.0, // Ajuste o zoom da câmera conforme necessário
+            zoom: 4.0, // Ajuste o zoom da câmera conforme necessário
           },
         },
         decoder: {
