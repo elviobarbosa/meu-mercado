@@ -26,9 +26,7 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-.camera {
-  width: 100%;
-  max-width: 400px;
-  height: 100%;
-  max-width: 300px;
+#qr-code-reader {
+  width: 600px;
+  
 }
