@@ -1,36 +1,50 @@
 "use client"
-import React, { useState, useCallback } from 'react';
-import BarcodeScanner from '../../components/BarcodeScanner'
+import React, { useState, useCallback, useEffect } from 'react';
+import BarcodeScanner from '../../components/BarcodeScanner';
+import { fetchData, barCodeAPI } from '../../utils/fetch';
 
 const ScanPage = () => {
   const [qrCode, setQrCode] = useState('');
-  const [apiData, setApiData] = useState(null);
-  const apiUrl = 'https://api.cosmos.bluesoft.com.br/gtins/7891910000197.json';
-
+  const [barCodeApiData, setBarCodeApiData] = useState(null);
   
+  // useEffect(() => {
+  //   const fetchDataAndSetState = async () => {
+  //     try {
+  //       const data = await fetchData(barCodeAPI('7898943569929'));
+  //       setBarCodeApiData(data);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
 
-  fetchData('7898943569929')
+  //   fetchDataAndSetState();
+  // }, []);
 
-  const handleScan = useCallback((qrCodeMessage: any) => {
+  const handleScan = useCallback(async (qrCodeMessage: any) => {
     console.log('Código de barras lido:', qrCodeMessage);
     if (qrCodeMessage !== qrCode) {
       setQrCode(qrCodeMessage);
       console.log(`https://api.cosmos.bluesoft.com.br/gtins/${qrCodeMessage}.json`)
-      //fetchData(qrCodeMessage);
-      
+
+      try {
+        const data = await fetchData(barCodeAPI(qrCodeMessage));
+        setBarCodeApiData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Handle error as needed
+      }
     }
     
     
-    //fetchData();
-    // Faça o que quiser com o código de barras lido, como enviar para o servidor, etc.
-  }, []);
+   
+  }, [qrCode]);
 
   return (
     <div>
       <h1>Leitor de Código de Barras</h1>
       <BarcodeScanner onScan={handleScan} />
       CÓDIGO LIDO: {qrCode}<br/>
-      {apiData}
+      <pre>{JSON.stringify(barCodeApiData, null, 2)}</pre>
     </div>
   );
 };
