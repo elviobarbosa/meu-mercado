@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "html5-qrcode": "^2.3.8",
-    "next": "14.0.1",
+    "next": "^14.0.3",
     "quagga": "^0.12.1",
     "react": "^18",
     "react-dom": "^18"
