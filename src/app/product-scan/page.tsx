@@ -1,5 +1,5 @@
 import React from 'react';
-import ProtectedRoute from '../components/ProtectedRoute'
+import ProtectedRoute from '../../components/ProtectedRoute'
 
 const ProductScan: React.FC = () => {
   return (
