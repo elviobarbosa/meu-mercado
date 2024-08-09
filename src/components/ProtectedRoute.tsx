@@ -2,6 +2,8 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '../lib/supabase-client';
+import { ROUTES } from '@/config/routes';
+import { MESSAGES } from '@/config/messages';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -18,7 +20,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
         setIsAuthenticated(true);  
       } else {  
         setIsAuthenticated(false);  
-        router.push('/login');  
+        router.push(ROUTES.LOGIN);  
       }  
     };  
 
@@ -26,7 +28,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   }, [router]);  
 
   if (isAuthenticated === null) {  
-    return <div>Carregando...</div>;
+    return <div>{MESSAGES.LOADING}</div>;
   }  
 
   if (!isAuthenticated) {  

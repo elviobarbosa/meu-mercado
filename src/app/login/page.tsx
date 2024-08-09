@@ -12,12 +12,15 @@ import {
   AlertIcon,
 } from '@chakra-ui/react';
 import { supabase } from "../../lib/supabase-client"
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/config/routes';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const router = useRouter();
 
   const handleLogin = async () => {
     setError('');
@@ -32,7 +35,7 @@ const LoginPage = () => {
       setError(error.message);
     } else {
       setSuccess('Login bem-sucedido!');
-      console.log('Usuário logado:', data);
+      router.push(ROUTES.PRODUCT_SCAN);
     }
   };
 

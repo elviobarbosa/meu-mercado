@@ -1,7 +1,8 @@
 "use client"
-import BarcodeScanner from '../../components/BarcodeScanner';
-import { fetchData, barCodeAPI } from '../../utils/fetch';
-import LoginPage from './pages/login.page';
+import BarcodeScanner from '../components/BarcodeScanner';
+import { fetchData, barCodeAPI } from '../utils/fetch';
+import LoginPage from './login/page';
+
 
 const Home = () => {
   return (
