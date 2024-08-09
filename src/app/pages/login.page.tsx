@@ -10,17 +10,28 @@ import {
   Alert,
   AlertIcon,
 } from '@chakra-ui/react';
+import { supabase } from "../lib/supabase-client"
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
-  const handleLogin = () => {
-    if (email === 'admin@example.com' && password === 'password') {
-      alert('Login bem-sucedido!');
+  const handleLogin = async () => {
+    setError('');
+    setSuccess('');
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
     } else {
-      setError('Usuário não encontrado.');
+      setSuccess('Login bem-sucedido!');
+      console.log('Usuário logado:', data);
     }
   };
 
@@ -49,6 +60,13 @@ const LoginPage = () => {
             <Alert status="error" borderRadius={8}>
               <AlertIcon />
               {error}
+            </Alert>
+          )}
+
+          {success && (
+            <Alert status="success" borderRadius={8}>
+              <AlertIcon />
+              {success}
             </Alert>
           )}
 

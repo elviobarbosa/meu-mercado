@@ -2,14 +2,10 @@
 import BarcodeScanner from '../../components/BarcodeScanner';
 import { fetchData, barCodeAPI } from '../../utils/fetch';
 import LoginPage from './pages/login.page';
-import { ChakraProvider } from '@chakra-ui/react'
 
 const Home = () => {
   return (
-    
-      <LoginPage />
-    
-    
+    <LoginPage />
   )
 }
 //
