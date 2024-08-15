@@ -11,7 +11,7 @@ import {
   Alert,
   AlertIcon,
 } from '@chakra-ui/react';
-import { supabase } from "../../lib/supabase-client"
+import { supabase } from '@/lib/supabase-client';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/config/routes';
 
