@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase-client';
+import { supabase } from '@/lib/supabase-client'
 import { ROUTES } from '@/config/routes';
 import { MESSAGES } from '@/config/messages';
 
