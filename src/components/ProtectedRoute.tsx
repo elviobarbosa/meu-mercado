@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase-client'
+//import { supabase } from '@/app/api/supabase/supabase-client';
 import { ROUTES } from '@/config/routes';
 import { MESSAGES } from '@/config/messages';
 
@@ -13,20 +13,25 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const router = useRouter();  
   const [isAuthenticated, setIsAuthenticated] = React.useState<boolean | null>(null);  
 
-  React.useEffect(() => {  
-    const checkSession = async () => {  
-      const { data: { session } } = await supabase.auth.getSession();  
-      if (session) {  
-        setIsAuthenticated(true);  
-      } else {  
-        setIsAuthenticated(false);  
-        router.push(ROUTES.LOGIN);  
-      }  
-    };  
+  const authenticate = async () => {
+    const response = await fetch('/api/auth/is-authenticated', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    const result = await response.json();
 
-    checkSession();  
-  }, [router]);  
-
+    if (response.ok) {
+      setIsAuthenticated(true);  
+    } else {
+      setIsAuthenticated(false); 
+      console.error(result.error);
+    }
+  };
+  authenticate();
+  
   if (isAuthenticated === null) {  
     return <div>{MESSAGES.LOADING}</div>;
   }  

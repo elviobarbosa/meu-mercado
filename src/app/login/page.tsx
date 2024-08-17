@@ -11,7 +11,6 @@ import {
   Alert,
   AlertIcon,
 } from '@chakra-ui/react';
-import { supabase } from '@/lib/supabase-client';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/config/routes';
 
@@ -25,17 +24,23 @@ const LoginPage = () => {
   const handleLogin = async () => {
     setError('');
     setSuccess('');
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+    
+    const response = await fetch('/api/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
     });
 
-    if (error) {
-      setError(error.message);
-    } else {
+    const result = await response.json();
+
+    if (response.ok) {
       setSuccess('Login bem-sucedido!');
       router.push(ROUTES.PRODUCT_SCAN);
+    } else {
+      setError(result.error.message);
+      console.error(result.error);
     }
   };
 
