@@ -30,10 +30,8 @@ const BarcodeScanner = ({ onScan }: { onScan: (code: string) => void }) => {
         <Heading size='md'>Leitor de código de barras</Heading>
       </CardHeader>
 
-      
-
       <CardBody>
-      <div id="qr-code-reader">
+      <div id="qr-code-reader" className="w-full">
         {/* O conteúdo do leitor de código de barras será renderizado aqui */}
       </div>
         <Stack divider={<StackDivider />} spacing='4'>

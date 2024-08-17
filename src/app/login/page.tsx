@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/config/routes';
+import { LoginResponse } from '../api/auth/route';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -33,14 +34,15 @@ const LoginPage = () => {
       body: JSON.stringify({ email, password }),
     });
 
-    const result = await response.json();
+    const result:LoginResponse = await response.json();
 
     if (response.ok) {
       setSuccess('Login bem-sucedido!');
+      console.log(result.session)
       router.push(ROUTES.PRODUCT_SCAN);
     } else {
-      setError(result.error.message);
-      console.error(result.error);
+      setError(result.message ?? 'An error occurred.');
+      console.error(result.message);
     }
   };
 

@@ -32,7 +32,7 @@ const ProductScan: React.FC = () => {
         setBarCodeApiData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
-        // Handle error as needed
+
       }
     }
     

@@ -13,24 +13,24 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const router = useRouter();  
   const [isAuthenticated, setIsAuthenticated] = React.useState<boolean | null>(null);  
 
-  const authenticate = async () => {
-    const response = await fetch('/api/auth/is-authenticated', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  // const authenticate = async () => {
+  //   const response = await fetch('/api/auth/is-authenticated', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
     
-    const result = await response.json();
+  //   const result = await response.json();
 
-    if (response.ok) {
-      setIsAuthenticated(true);  
-    } else {
-      setIsAuthenticated(false); 
-      console.error(result.error);
-    }
-  };
-  authenticate();
+  //   if (response.ok) {
+  //     setIsAuthenticated(true);  
+  //   } else {
+  //     setIsAuthenticated(false); 
+  //     console.error(result.error);
+  //   }
+  // };
+  // authenticate();
   
   if (isAuthenticated === null) {  
     return <div>{MESSAGES.LOADING}</div>;
