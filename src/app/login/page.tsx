@@ -14,6 +14,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/config/routes';
 import { LoginResponse } from '../api/auth/route';
+import { useSession } from '../session-context';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -21,6 +22,7 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const router = useRouter();
+  const { setSession } = useSession();
 
   const handleLogin = async () => {
     setError('');
@@ -37,6 +39,7 @@ const LoginPage = () => {
     const result:LoginResponse = await response.json();
 
     if (response.ok) {
+      setSession(result.session);
       setSuccess('Login bem-sucedido!');
       console.log(result.session)
       router.push(ROUTES.PRODUCT_SCAN);
