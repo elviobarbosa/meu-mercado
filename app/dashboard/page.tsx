@@ -38,7 +38,7 @@ export default function Dashboard() {
         .order("created_at", { ascending: false });
 
       if (!error && data) {
-        setLists(data);
+        setLists(data as any);
       }
       setLoading(false);
     }
